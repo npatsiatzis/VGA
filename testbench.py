@@ -1,20 +1,20 @@
-# Functional test for uart module
+# Functional test for the VGA module
 import cocotb
 from cocotb.clock import Clock
-from cocotb.triggers import Timer,RisingEdge,FallingEdge,ClockCycles,ReadWrite
-
+from cocotb.triggers import RisingEdge
 from cocotb.utils import get_sim_time
-from cocotb.result import TestFailure
-import random
-from cocotb_coverage.coverage import CoverCross,CoverPoint,coverage_db
 
 
 
 @cocotb.test()
 async def test(dut):
-	"""Check results and coverage for UART"""
+	"""Check the functional correctness of the VGA module
+	pixel clock, this has to be according to the requirements for the image to
+	to be properly rendered."""
 
-	cocotb.start_soon(Clock(dut.i_clk, (1/(25*10**6)), units="sec").start())	#pixel clock
+	#here we are following along the default example of 640x480 @60 Hz, thus we use
+	#a 25 MHz clock. Consult : http://tinyvga.com/vga-timing
+	cocotb.start_soon(Clock(dut.i_clk, (1/(25*10**6)), units="sec").start())	
 
 	while(get_sim_time('ns') < 10**10):
 		await RisingEdge(dut.i_clk)
