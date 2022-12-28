@@ -1,3 +1,5 @@
+![example workflow](https://github.com/npatsiatzis/vga/actions/workflows/regression.yml/badge.svg)
+
 # VGA RTL implementation
 
 - design consists of VGA timing generator, image generator and VGA top
