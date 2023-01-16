@@ -1,0 +1,17 @@
+[tasks]
+bmc
+
+[options]
+mode prove
+depth 30
+
+[engines]
+smtbmc
+
+[script]
+ghdl --std=08 display_timings.vhd display_timings.psl -e display_timings
+prep -top display_timings
+
+[files]
+display_timings.psl
+display_timings.vhd
