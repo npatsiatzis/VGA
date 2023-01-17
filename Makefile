@@ -21,5 +21,7 @@ test:
 formal :
 		sby --yosys "yosys -m ghdl" -f display_timings.sby
 
+formal_sva :
+		sby --yosys "yosys -m ghdl" -f display_timings_sva.sby
 # include cocotb's make rules to take care of the simulator setup
 include $(shell cocotb-config --makefiles)/Makefile.sim

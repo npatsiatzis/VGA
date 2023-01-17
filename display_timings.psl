@@ -5,15 +5,12 @@ vunit formal_test(display_timings(rtl)) {
 
 	default clock is rising_edge(i_clk);
 
-
 	--assert that horizontal position counter stays within range
-	--and behaves accordingly
-	assert_x_pos : assert always {r_x = line} |=> {r_x = 0}; 
+	assert_x_pos_wrap : assert always {prev(r_x) = line} |-> {r_x = 0}; 
 	assert_x_range : assert always {r_x <=line};
 
 	--assert that vertical position counter stays within range
-	--and behaves accordingly
-	assert_y_pos : assert always {r_x = line and r_y = frame} |=> {r_y = 0};
+	assert_y_pos : assert always {prev(r_x) = line and prev(r_y) = frame} |-> {r_y = 0};
 	assert_y_range : assert always {r_y <=frame};
 
 	--assert that horizontal sync signal assumes the appropriate values

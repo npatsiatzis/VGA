@@ -1,9 +1,10 @@
 [tasks]
-bmc
+task_induction
 
 [options]
-mode prove
-depth 30
+
+task_induction: mode prove
+task_induction: depth 30
 
 [engines]
 smtbmc
