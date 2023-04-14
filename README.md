@@ -1,3 +1,4 @@
+![example workflow](https://github.com/npatsiatzis/vga/actions/workflows/regression.yml/badge.svg)
 ![example workflow](https://github.com/npatsiatzis/vga/actions/workflows/formal.yml/badge.svg)
 
 # VGA RTL implementation
