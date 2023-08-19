@@ -15,4 +15,4 @@ prep -top display_timings
 
 [files]
 display_timings.psl
-../rtl/display_timings.vhd
+../rtl/VHDL/display_timings.vhd

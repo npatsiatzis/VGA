@@ -12,9 +12,9 @@ rtl_dir = tests_dir                                    #path to hdl folder where
 module = "testbench"
 toplevel = "vga"   
 vhdl_sources = [
-    os.path.join(rtl_dir, "display_timings.vhd"),
-    os.path.join(rtl_dir, "image_generator.vhd"),
-    os.path.join(rtl_dir, "vga.vhd"),
+    os.path.join(rtl_dir, "../rtl/VHDL/display_timings.vhd"),
+    os.path.join(rtl_dir, "../rtl/VHDL/image_generator.vhd"),
+    os.path.join(rtl_dir, "../rtl/VHDL/vga.vhd"),
     ]
                              
 def test():
