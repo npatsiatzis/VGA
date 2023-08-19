@@ -8,9 +8,9 @@
 - image generator generates a standard test frame
 
 -- RTL code in:
-- [VHDL](https://github.com/npatsiatzis/fifo_asynchronous/tree/main/rtl/VHDL)
-<!-- - [SystemVerilog](https://github.com/npatsiatzis/fifo_asynchronous/tree/main/rtl/SystemVerilog) -->
+- [VHDL](https://github.com/npatsiatzis/vga/tree/main/rtl/VHDL)
+- [SystemVerilog](https://github.com/npatsiatzis/vga/tree/main/rtl/SystemVerilog)
 
 -- Functional verification with methodologies:
-- [cocotb](https://github.com/npatsiatzis/fifo_asynchronous/tree/main/cocotb_sim)
-- [pyuvm](https://github.com/npatsiatzis/fifo_asynchronous/tree/main/formal)
+- [cocotb](https://github.com/npatsiatzis/vga/tree/main/cocotb_sim)
+- [pyuvm](https://github.com/npatsiatzis/vga/tree/main/formal)
