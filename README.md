@@ -14,3 +14,4 @@
 -- Functional verification with methodologies:
 - [cocotb](https://github.com/npatsiatzis/vga/tree/main/cocotb_sim)
 - [pyuvm](https://github.com/npatsiatzis/vga/tree/main/formal)
+- [verilator](https://github.com/npatsiatzis/vga/tree/main/verilator_sim)

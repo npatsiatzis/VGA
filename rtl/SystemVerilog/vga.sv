@@ -1,5 +1,6 @@
 `default_nettype none
 
+/* verilator lint_off MULTITOP */
 module vga
     #
     (
@@ -42,4 +43,4 @@ module vga
     image_generator image (.*,.i_active(w_active));
 
     assign o_active = w_active;
-endmodule : vga
+endmodule : vga/* verilator lint_on MULTITOP */

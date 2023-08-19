@@ -27,9 +27,9 @@ module display_timings
 
     // horizontal timings (for VGA 640x480 @60Hz)
     localparam int HorizontalEnd = G_H_RES - 1;
-    localparam int HorizontalStart = HorizontalEnd + G_H_FP;
-    localparam int HorizontalSyncStart = HorizontalStart + G_H_SYNC;
-    localparam int Line = HorizontalSyncStart + G_H_BP;
+    localparam int HorizontalSyncStart = HorizontalEnd + G_H_FP;
+    localparam int HorizontalSyncEnd = HorizontalSyncStart + G_H_SYNC;
+    localparam int Line = HorizontalSyncEnd + G_H_BP;
 
     // vertical timings (for VGA 640x480 @60Hz)
     localparam int VerticalEnd = G_V_RES - 1;
@@ -37,10 +37,12 @@ module display_timings
     localparam int VerticalSyncEnd = VerticalSyncStart + G_V_SYNC;
     localparam int Frame = VerticalSyncEnd + G_V_BP;
 
-    assign o_active = ($size(HorizontalSyncStart)'(r_x) <= HorizontalEnd &&
-        $size(VerticalEnd)'(r_x) <= VerticalEnd) ? 1'b1 : 1'b0;
-    assign o_h_sync = ($size(HorizontalStart)'(r_x) > HorizontalStart &&
-     $size(HorizontalSyncStart)'(r_x) <= HorizontalSyncStart) ? 1'b0 : 1'b1;
+    assign o_active = ($size(HorizontalEnd)'(r_x) <= HorizontalEnd &&
+        $size(VerticalEnd)'(r_y) <= VerticalEnd) ? 1'b1 : 1'b0;
+
+    assign o_h_sync = ($size(HorizontalSyncStart)'(r_x) > HorizontalSyncStart &&
+     $size(HorizontalSyncEnd)'(r_x) <= HorizontalSyncEnd) ? 1'b0 : 1'b1;
+
     assign o_v_sync = ($size(VerticalSyncStart)'(r_y) > VerticalSyncStart &&
      $size(VerticalSyncEnd)'(r_y) <= VerticalSyncEnd) ? 1'b0 : 1'b1;
 

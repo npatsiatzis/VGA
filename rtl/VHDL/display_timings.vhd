@@ -42,7 +42,7 @@ begin
 
 	-- active when x position and y position is not in the blanking intervals
 	-- ie sync signals active (low) between the beginning of front porch and the end of sync. section
-	o_active <= '1' when (r_x <= h_end and r_x <= v_end) else '0';
+	o_active <= '1' when (r_x <= h_end and r_y <= v_end) else '0';
 	o_hsync <= '0' when (r_x > hs_start and r_x <= hs_end) else '1';
 	o_vsync <= '0' when (r_y > vs_start and r_y <= vs_end) else '1';
 
