@@ -1,4 +1,3 @@
-![example workflow](https://github.com/npatsiatzis/vga/actions/workflows/regression.yml/badge.svg)
 ![example workflow](https://github.com/npatsiatzis/vga/actions/workflows/formal.yml/badge.svg)
 
 # VGA RTL implementation
@@ -9,8 +8,9 @@
 
 -- RTL code in:
 - [VHDL](https://github.com/npatsiatzis/fifo_asynchronous/tree/main/rtl/VHDL)
-<!-- - [SystemVerilog](https://github.com/npatsiatzis/fifo_asynchronous/tree/main/rtl/SystemVerilog) -->
 
 -- Functional verification with methodologies:
-- [cocotb](https://github.com/npatsiatzis/fifo_asynchronous/tree/main/cocotb_sim)
-- [pyuvm](https://github.com/npatsiatzis/fifo_asynchronous/tree/main/formal)
+- [formal](https://github.com/npatsiatzis/fifo_asynchronous/tree/main/formal)
+
+- formal verification of the display_timings module using SymbiYosys (sby), (properties specified in PSL)
+    - $ make formal
