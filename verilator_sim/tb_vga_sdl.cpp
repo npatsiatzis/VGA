@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <SDL.h>
-#include <verilated.h>
+#include <verilated_vcd_c.h>
+#include <verilated_cov.h>
 #include "Vtop_vga_sdl.h"
 #include "Vtop_vga_sdl_top_vga_sdl.h" //to get parameter values, after they've been made visible in SV
 
@@ -59,12 +60,12 @@ int main(int argc, char* argv[]) {
     Vtop_vga_sdl* top = new Vtop_vga_sdl;
 
     // reset
-    // top->sim_rst = 1;
+    top->i_rst = 1;
     top->i_clk = 0;
     top->eval();
     top->i_clk = 1;
     top->eval();
-    // top->sim_rst = 0;
+    top->i_rst = 0;
     top->i_clk = 0;
     top->eval();
 
@@ -100,6 +101,9 @@ int main(int argc, char* argv[]) {
             }
 
             if (keyb_state[SDL_SCANCODE_Q]) break;  // quit if user presses 'Q'
+            // VerilatedCov::write();
+            Verilated::mkdir("logs");
+            Verilated::threadContextp()->coveragep()->write("logs/coverage.dat");
 
             SDL_UpdateTexture(sdl_texture, NULL, screenbuffer, H_RES*sizeof(Pixel));
             SDL_RenderClear(sdl_renderer);
@@ -121,5 +125,6 @@ int main(int argc, char* argv[]) {
     SDL_DestroyRenderer(sdl_renderer);
     SDL_DestroyWindow(sdl_window);
     SDL_Quit();
+
     return 0;
 }

@@ -16,6 +16,7 @@ module top_vga_sdl
 
     (
         input  logic i_clk,
+        input  logic i_rst,
         output logic [CORDW-1:0] sdl_sx,
         output logic [CORDW-1:0] sdl_sy,
         output logic sdl_de,
@@ -44,17 +45,22 @@ module top_vga_sdl
 
     // define a square with screen coordinates
     logic square;
-    always_comb begin
-        square = (sx > 220 && sx < 420) && (sy > 140 && sy < 340);
-    end
+    assign square = (sx > 220 && sx < 420) && (sy > 140 && sy < 340);
+    // always_comb begin
+    //     square = (sx > 220 && sx < 420) && (sy > 140 && sy < 340);
+    // end
 
-    // paint colours: white inside square, blue outside
     logic [3:0] paint_r, paint_g, paint_b;
-    always_comb begin
-        paint_r = (square) ? 4'hF : 4'h1;
-        paint_g = (square) ? 4'hF : 4'h3;
-        paint_b = (square) ? 4'hF : 4'h7;
-    end
+    assign paint_r = (square) ? 4'hF : 4'h1;
+    assign paint_g = (square) ? 4'hF : 4'h3;
+    assign paint_b = (square) ? 4'hF : 4'h7;
+    // paint colours: white inside square, blue outside
+    // logic [3:0] paint_r, paint_g, paint_b;
+    // always_comb begin
+    //     paint_r = (square) ? 4'hF : 4'h1;
+    //     paint_g = (square) ? 4'hF : 4'h3;
+    //     paint_b = (square) ? 4'hF : 4'h7;
+    // end
 
     // SDL output (8 bits per colour channel)
     always_ff @(posedge i_clk) begin
