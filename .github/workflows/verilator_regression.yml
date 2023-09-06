@@ -15,6 +15,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: install sdl 
+        run: sudo apt-get install libsdl2-dev
     
       - name: regression
         run: docker run -v ${{ github.workspace }}:/src -w /src/verilator_sim  --entrypoint make verilator/verilator:stable
