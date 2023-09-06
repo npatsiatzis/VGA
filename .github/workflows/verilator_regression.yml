@@ -21,6 +21,7 @@ jobs:
           sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
           sudo apt-get update -y -qq
           sudo apt-get install libsdl2-dev
+          cat /usr/include/SDL2/SDL.h
     
       - name: regression
         run: docker run -v ${{ github.workspace }}:/src -v /usr/include/SDL2:/usr/include/SDL2 -w /src/verilator_sim  --entrypoint make verilator/verilator:stable
