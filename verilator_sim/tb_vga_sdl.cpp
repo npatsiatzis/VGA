@@ -4,6 +4,7 @@
 #include <verilated_cov.h>
 #include "Vtop_vga_sdl.h"
 #include "Vtop_vga_sdl_top_vga_sdl.h" //to get parameter values, after they've been made visible in SV
+#include<chrono>
 
 // screen dimensions
 const int H_RES = Vtop_vga_sdl_top_vga_sdl::G_H_RES;
@@ -54,7 +55,11 @@ int main(int argc, char* argv[]) {
     // reference SDL keyboard state array: https://wiki.libsdl.org/SDL_GetKeyboardState
     const Uint8 *keyb_state = SDL_GetKeyboardState(NULL);
 
-    printf("Simulation running. Press 'Q' in simulation window to quit.\n\n");
+    printf("Simulation running. Press 'Q' in simulation window to quit, or wait 5 sec and it will quit by itself\n\n");
+
+    using namespace std;
+    auto start = std::chrono::steady_clock::now();
+    int elapsed_sec = 0;
 
     // initialize Verilog module
     Vtop_vga_sdl* top = new Vtop_vga_sdl;
@@ -100,8 +105,14 @@ int main(int argc, char* argv[]) {
                 }
             }
 
+            auto end = std::chrono::steady_clock::now();
+            auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+            elapsed_sec = elapsed_ms.count() / 1000;
+            if (elapsed_sec >=5) {
+                break;
+            }
+
             if (keyb_state[SDL_SCANCODE_Q]) break;  // quit if user presses 'Q'
-            // VerilatedCov::write();
             Verilated::mkdir("logs");
             Verilated::threadContextp()->coveragep()->write("logs/coverage.dat");
 
