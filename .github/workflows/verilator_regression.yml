@@ -23,7 +23,7 @@ jobs:
           sudo apt-get install libsdl2-dev
     
       - name: regression
-        run: docker run -v ${{ github.workspace }}:/src -w /src/verilator_sim  --entrypoint make verilator/verilator:stable
+        run: docker run -v ${{ github.workspace }}:/src -v /usr/include/SDL2:/usr/include/SDL2 -w /src/verilator_sim  --entrypoint make verilator/verilator:stable
           
       - name: Publish Coverage
         run: |
