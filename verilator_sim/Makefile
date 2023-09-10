@@ -38,7 +38,7 @@ top_vga_sdl.exe: .stamp.verilate
 	./obj_dir/Vtop_vga_sdl
 
 .stamp.verilate: 
-	verilator ${VFLAGS} --I$(RTL_DIR) \
+	verilator ${VFLAGS} --I$(RTL_DIR) -DUSE_VERILATOR \
 		-cc $(RTL_DIR)/$(TOPLEVEL).sv --exe $(MODULE) \
 		-CFLAGS "${SDL_CFLAGS}" -LDFLAGS "${SDL_LDFLAGS}"
 	@touch .stamp.verilate

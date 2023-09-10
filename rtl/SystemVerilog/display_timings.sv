@@ -70,23 +70,24 @@ module display_timings
                         /*          ######################      */
                         /*          Assertions && Coverage      */
                         /*          ######################      */
-    assert_h_sync_0 : assert property (@(posedge i_clk) ($size(HorizontalSyncStart)'(r_x) > HorizontalSyncStart &&
-     $size(HorizontalSyncEnd)'(r_x) <= HorizontalSyncEnd) |-> o_h_sync == 1'b0);
-    assert_h_sync_1 : assert property (@(posedge i_clk) !($size(HorizontalSyncStart)'(r_x) > HorizontalSyncStart &&
-     $size(HorizontalSyncEnd)'(r_x) <= HorizontalSyncEnd) |-> o_h_sync == 1'b1);
+    `ifdef USE_VERILATOR
+        assert_h_sync_0 : assert property (@(posedge i_clk) ($size(HorizontalSyncStart)'(r_x) > HorizontalSyncStart &&
+         $size(HorizontalSyncEnd)'(r_x) <= HorizontalSyncEnd) |-> o_h_sync == 1'b0);
+        assert_h_sync_1 : assert property (@(posedge i_clk) !($size(HorizontalSyncStart)'(r_x) > HorizontalSyncStart &&
+         $size(HorizontalSyncEnd)'(r_x) <= HorizontalSyncEnd) |-> o_h_sync == 1'b1);
 
-    assert_v_sync_0 : assert property (@(posedge  i_clk) ($size(VerticalSyncStart)'(r_y) > VerticalSyncStart &&
-     $size(VerticalSyncEnd)'(r_y) <= VerticalSyncEnd) |-> o_v_sync == 1'b0);
-    assert_v_sync_1 : assert property (@(posedge  i_clk) !($size(VerticalSyncStart)'(r_y) > VerticalSyncStart &&
-     $size(VerticalSyncEnd)'(r_y) <= VerticalSyncEnd) |-> o_v_sync == 1'b1);
+        assert_v_sync_0 : assert property (@(posedge  i_clk) ($size(VerticalSyncStart)'(r_y) > VerticalSyncStart &&
+         $size(VerticalSyncEnd)'(r_y) <= VerticalSyncEnd) |-> o_v_sync == 1'b0);
+        assert_v_sync_1 : assert property (@(posedge  i_clk) !($size(VerticalSyncStart)'(r_y) > VerticalSyncStart &&
+         $size(VerticalSyncEnd)'(r_y) <= VerticalSyncEnd) |-> o_v_sync == 1'b1);
 
 
-    assert_x_range : assert property(@(posedge i_clk) $size(Line)'(r_x) <= Line);
-    assert_y_range : assert property(@(posedge i_clk) $size(Frame)'(r_y) <= Frame);
-    assert_x_wrap : assert property (@(posedge i_clk) $size(Line)'(r_x) == Line |=> $size(Line)'(r_x) == 0);
-    assert_y_wrap : assert property (@(posedge i_clk) $size(Frame)'(r_y) == Frame && $size(Line)'(r_x) == Line  |=> $size(Frame)'(r_y) == 0);
-    cover_x_wrap : cover property (@(posedge i_clk) $size(Line)'(r_x) == 0 && $past($size(Line)'(r_x)) == Line);
-    cover_y_wrap : cover property (@(posedge i_clk) $size(Frame)'(r_y) == 0 && $size(Line)'(r_x) == 0  && $past($size(Frame)'(r_y)) == Frame);
-    
+        assert_x_range : assert property(@(posedge i_clk) $size(Line)'(r_x) <= Line);
+        assert_y_range : assert property(@(posedge i_clk) $size(Frame)'(r_y) <= Frame);
+        assert_x_wrap : assert property (@(posedge i_clk) $size(Line)'(r_x) == Line |=> $size(Line)'(r_x) == 0);
+        assert_y_wrap : assert property (@(posedge i_clk) $size(Frame)'(r_y) == Frame && $size(Line)'(r_x) == Line  |=> $size(Frame)'(r_y) == 0);
+        cover_x_wrap : cover property (@(posedge i_clk) $size(Line)'(r_x) == 0 && $past($size(Line)'(r_x)) == Line);
+        cover_y_wrap : cover property (@(posedge i_clk) $size(Frame)'(r_y) == 0 && $size(Line)'(r_x) == 0  && $past($size(Frame)'(r_y)) == Frame);
+    `endif
 
 endmodule : display_timings

@@ -10,7 +10,7 @@ module image_generator
         output logic [1 : 0] o_b
     );
 
-    typedef enum logic [2 : 0] {S[0:5]} state_t;
+    typedef enum logic [2 : 0] {S0,S1,S2,S3,S4,S5} state_t;
     state_t state;
 
     logic [2 : 0] r;

@@ -16,6 +16,7 @@ module vga
 
     (
         input logic i_clk,
+        input logic i_rst,
         output logic o_h_sync,
         output logic o_v_sync,
         output logic [2 : 0] o_r,
@@ -29,14 +30,14 @@ module vga
     logic w_active;
 
     display_timings #(
-        .G_H_RES,
-        .G_V_RES,
-        .G_H_FP,
-        .G_H_SYNC,
-        .G_H_BP,
-        .G_V_FP,
-        .G_V_SYNC,
-        .G_V_BP
+        .G_H_RES(G_H_RES),
+        .G_V_RES(G_V_RES),
+        .G_H_FP(G_H_FP),
+        .G_H_SYNC(G_H_SYNC),
+        .G_H_BP(G_H_BP),
+        .G_V_FP(G_V_FP),
+        .G_V_SYNC(G_V_SYNC),
+        .G_V_BP(G_V_BP)
         )
     timings (.*,.o_active(w_active),.o_x(w_x),.o_y(w_y));
 

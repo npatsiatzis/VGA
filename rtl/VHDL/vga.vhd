@@ -13,12 +13,14 @@ entity vga is
 		g_v_sync : natural :=2;
 		g_v_bp : natural :=33);
 	port(
-		i_clk : in std_ulogic;							--pixel clock											
-		o_hsync : out std_ulogic;						--horizontal sync
-		o_vsync : out std_ulogic;						--vertical sync
+		i_clk : in std_ulogic;							--pixel clock				
+		i_rst : in std_ulogic;		
+		o_h_sync : out std_ulogic;						--horizontal sync
+		o_v_sync : out std_ulogic;						--vertical sync
         o_r : out std_ulogic_vector(2 downto 0);
         o_g : out std_ulogic_vector(2 downto 0);
-        o_b : out std_ulogic_vector(1 downto 0));
+        o_b : out std_ulogic_vector(1 downto 0);
+        o_active : out std_ulogic);
 end vga;
 
 architecture top of vga is 
@@ -38,9 +40,10 @@ begin
 		g_v_sync => g_v_sync,
 		g_v_bp => g_v_bp)
 	port map(
-		i_clk => i_clk,											
-		o_hsync => o_hsync,
-		o_vsync  => o_vsync,
+		i_clk => i_clk,		
+		i_rst => i_rst,									
+		o_h_sync => o_h_sync,
+		o_v_sync  => o_v_sync,
 		o_x => w_x,
 		o_y => w_y,
 		o_active => w_active);
