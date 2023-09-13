@@ -14,12 +14,12 @@ vunit formal_test(display_timings(rtl)) {
 	assert_y_range : assert always {r_y <=frame};
 
 	--assert that horizontal sync signal assumes the appropriate values
-	assert_h_sync_0 : assert always { r_x > hs_start and r_x <= hs_end} |-> {o_hsync = '0'};
-	assert_h_sync_1 : assert always { not(r_x > hs_start and r_x <= hs_end)} |-> {o_hsync = '1'};
+	assert_h_sync_0 : assert always { r_x > hs_start and r_x <= hs_end} |-> {o_h_sync = '0'};
+	assert_h_sync_1 : assert always { not(r_x > hs_start and r_x <= hs_end)} |-> {o_h_sync = '1'};
 
 	--assert that vertical sync signal assumes the appropriate values
-	assert_v_sync_0 : assert always { r_y > vs_start and r_y <= vs_end} |-> {o_vsync = '0'};
-	assert_v_sync_1 : assert always { not(r_y > vs_start and r_y <= vs_end)} |-> {o_vsync = '1'};
+	assert_v_sync_0 : assert always { r_y > vs_start and r_y <= vs_end} |-> {o_v_sync = '0'};
+	assert_v_sync_1 : assert always { not(r_y > vs_start and r_y <= vs_end)} |-> {o_v_sync = '1'};
 
 	
 }
